@@ -1,0 +1,8 @@
+{
+  "name": "Michigan & UP Family Road Trip",
+  "description": "An interactive, beautiful road trip itinerary, packing list, and travel tracker for Chicago, Wisconsin, and the Upper Peninsula.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
