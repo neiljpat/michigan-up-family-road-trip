@@ -251,74 +251,68 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
   {
     dayNumber: 4,
     date: "Wednesday, Aug 5",
-    title: "Pictured Rocks Cruise",
-    subtitle: "Cliffs from the Water & Famous Overlooks",
-    highlight: "Cruising beneath 200-foot multi-colored cliffs and viewing the iconic Miners Castle",
+    title: "Pictured Rocks by Land",
+    subtitle: "Cliffs, Coves & Painted Shoreline",
+    highlight: "Seeing the Pictured Rocks cliffs the dog-friendly way — Miners Castle and the painted shoreline at Miners Beach — with Fitzy along the whole day",
     stats: {
-      drivingTime: "approx. 45 mins total",
+      drivingTime: "approx. 1.5 hours total",
       superchargeStopCount: 0,
-      highlights: ["Pictured Rocks Boat Cruise", "Miners Castle Overlook"]
+      highlights: ["Miners Castle cliffs", "Miners Beach cove", "Lazy lake afternoon"]
     },
     items: [
       {
         id: "d4-1",
-        time: "08:30 AM",
-        label: "Early Airbnb Breakfast",
-        details: "Fuel up early to make sure you get to the Munising harbor with modern ease.",
-        category: "food"
+        time: "09:00 AM",
+        label: "Slow Lakeside Breakfast",
+        details: "No boat to catch today — linger over coffee on the deck and a big breakfast while the lake mist burns off.",
+        category: "lodging"
       },
       {
         id: "d4-2",
-        time: "09:30 AM",
-        label: "Arrive at Munising Cruise Harbor",
-        details: "Park easily in the dedicated harbor lots. Get ready to board the big catamaran.",
-        category: "travel",
-        location: "Munising Dock, MI"
+        time: "10:30 AM",
+        label: "Miners Castle Cliffs",
+        details: "The headline Pictured Rocks formation you can reach by land. Leashed dogs are welcome on the paved trails, the viewing platforms, and the picnic area, so Fitzy comes too. Walk the short flat path to the upper and lower overlooks above the turret-shaped cliff and the neon-turquoise water.",
+        category: "activity",
+        isDogFriendly: true,
+        isKidFriendly: true,
+        duration: "1.5 hours",
+        location: "Miners Castle, Munising, MI"
       },
       {
         id: "d4-3",
-        time: "09:45 AM",
-        label: "Settle Fitzy into Shaded Harbor Kennels",
-        details: "Since dogs aren't allowed on the main cruise, the tour company provides completely FREE, highly shaded, safe, on-site kennels. Bring Fitzy's favorite plush dog bed, chew toy, and water. The attendants keep a wonderful eye on him!",
-        category: "activity",
+        time: "12:00 PM",
+        label: "Pasties to-go from Muldoon's + Lakeshore Picnic",
+        details: "Swing into 'Muldoon's' for authentic UP pasties (flaky beef or veggie pies) and eat them picnic-style at a lakeshore pullout so Fitzy stays right with you.",
+        category: "food",
         isDogFriendly: true,
-        duration: "15 mins"
+        duration: "1 hour",
+        location: "Muldoon's Pasties, Munising, MI"
       },
       {
         id: "d4-4",
-        time: "10:00 AM",
-        label: "Pictured Rocks Boat Cruise",
-        details: "Board the 2.5-hour classic boat tour. The vessel glides right alongside the famous painted mineral-streaked sandstone cliffs, caves, and arches (Miners Castle, Battleship Rocks, East Channel Light). Reva & Kabir will love the top deck sea breeze!",
-        category: "activity",
+        time: "01:00 PM",
+        label: "Miners Beach Cove",
+        details: "One of the few places you can stand right on the painted-rock shoreline — and leashed dogs are welcome on the sand and in the water. Let Reva & Kabir splash the shallows, Fitzy wade, and look east down the coast toward the cliffs.",
+        category: "beach",
+        isDogFriendly: true,
         isKidFriendly: true,
-        duration: "2.5 hours"
+        duration: "2 hours",
+        location: "Miners Beach, Munising, MI"
       },
       {
-         id: "d4-5",
-         time: "12:30 PM",
-         label: "Retrieve Fitzy & Eat Hot local Pasties!",
-         details: "Pick up your happy, rested dog Fitzy from the kennel. Drive just 2 minutes down the block to 'Muldoons' to grab authentic UP Pasties! Flaky beef or veggie pies that are a UP custom.",
-         category: "food",
-         isDogFriendly: true,
-         duration: "1 hour",
-         location: "Muldoons Pasties, Munising, MI"
+        id: "d4-5",
+        time: "03:30 PM",
+        label: "Back to the Cabin: Swim, Paddle & Rest",
+        details: "Your one true breather. Head back to Au Train for paddling, swimming, hammock time, and a board game while Fitzy naps on the deck — no agenda for the rest of the day.",
+        category: "lodging"
       },
       {
         id: "d4-6",
-        time: "01:30 PM",
-        label: "Miners Castle Overlook",
-        details: "Drive east into the park. Walk the beautifully paved, 5-minute flat path to look down at the gorgeous, turret-like Miners Castle formation and the neon turquoise waters of Lake Superior. Easily stroller-friendly or walking-friendly for Kabir and Reva.",
-        category: "activity",
-        isKidFriendly: true,
-        isDogFriendly: true,
-        duration: "1 hour"
-      },
-      {
-        id: "d4-7",
-        time: "03:00 PM",
-        label: "Return to Airbnb: Swimming & Rest",
-        details: "Spend a beautiful, slow late-afternoon paddling, swimming, and relaxing around your rental property. Let Reva & Kabir float and Fitzy nap on the deck.",
-        category: "lodging"
+        time: "06:30 PM",
+        label: "Easy Grill Dinner & Sunset",
+        details: "Throw something simple on the grill and watch the evening colors come up over the lake.",
+        category: "food",
+        isKidFriendly: true
       }
     ]
   },
@@ -625,7 +619,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
 
 export const INITIAL_PACKING_LIST: PackingItem[] = [
   { id: "p1", text: "🔌 Pack Tesla Mobile Connector & adapter nozzles", category: "Tesla", checked: false },
-  { id: "p2", text: "🛥️ Pre-book Pictured Rocks cruise tickets (August gets busy!)", category: "General", checked: true },
+  { id: "p2", text: "🚤 Cancel & refund the pre-booked Pictured Rocks cruise — going by land instead (dogs can't board the boats)", category: "General", checked: false },
   { id: "p3", text: "🎫 Aquire Wisconsin State Park pass (or buy day passes)", category: "General", checked: false },
   { id: "p4", text: "🌲 Buy Michigan Recreation Passport (handles Palms Book & Tahquamenon Falls)", category: "General", checked: false },
   { id: "p-lodging-1", text: "🏨 Book dog-friendly hotel in Green Bay, WI (Day 1 check-in)", category: "General", checked: false },
@@ -668,7 +662,7 @@ export const INITIAL_NOTES: QuickNote[] = [
   },
   {
     id: "n3",
-    text: "Pictured Rocks cruise departs at 10:00 AM sharp on Aug 5 (Day 4). Need to be at the dock by 9:30 to drop off Fitzy in the harbor kennels.",
+    text: "🚤 Pictured Rocks plan: doing it BY LAND on Aug 5 (Day 4) — Miners Castle cliffs + Miners Beach, both dog-friendly so Fitzy stays with us. Dogs can't board the tour boats, so cancel/refund the pre-booked cruise tickets.",
     timestamp: "2026-06-14T16:00:00-07:00",
     category: "Activities"
   }
@@ -682,6 +676,7 @@ export const ROUTE_PATH_COORDINATES: { name: string; x: number; y: number; day: 
   { name: "Escanaba Charger", x: 39, y: 36, day: 2, desc: "Supercharge & Grocery Run (10:30 AM)", type: 'supercharge' },
   { name: "Kitch-iti-kipi Spring", x: 50, y: 31, day: 2, desc: "Ferry over Big Spring (12:15 PM)", type: 'activity' },
   { name: "Munising / Au Train Airbnb", x: 49, y: 22, day: 2, desc: "Lakeside Basecamp Airbnb Check-in", type: 'airbnb' },
+  { name: "Miners Castle & Beach", x: 54, y: 19, day: 4, desc: "Pictured Rocks cliffs & cove, by land with Fitzy", type: 'activity' },
   { name: "Marquette Day Trip", x: 35, y: 19, day: 5, desc: "Presque Isle Park & Meijer Charger", type: 'activity' },
   { name: "Upper Tahquamenon Falls", x: 74, y: 22, day: 6, desc: "Root Beer Amber Cascades", type: 'activity' },
   { name: "Saint Ignace Ferry", x: 80, y: 28, day: 7, desc: "Mackinac Ferry Departure", type: 'stop' },

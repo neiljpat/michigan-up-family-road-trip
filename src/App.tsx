@@ -34,7 +34,9 @@ import QuickNotes from './components/QuickNotes';
 // new plan instead of being pinned to a stale saved copy.
 // v2 (2026-06-15): departure slipped to Aug 2 → trip compressed to 8 days (was 9), Lakeside
 // Basecamp rest day dropped, cruise kept anchored on Aug 5.
-const TRIP_SCHEMA_VERSION = '2026-08-02-8day';
+// v3 (2026-06-15): Aug 5 boat cruise dropped — replaced with a dog-friendly "Pictured Rocks by
+// land" day (Miners Castle + Miners Beach) so Fitzy is never left alone; cruise to-do/note retired.
+const TRIP_SCHEMA_VERSION = '2026-08-05-byland';
 
 // Fix day-number references in user-editable notes/to-dos when the structure shifts, without
 // discarding any booking codes the user has typed in.
@@ -43,6 +45,11 @@ const patchDayRefs = (text: string): string =>
     .replace('Days 2-7', 'Days 2-6')
     .replace('Hotel (Day 8)', 'Hotel (Day 7)')
     .replace('(Day 8 check-in)', '(Day 7 check-in)');
+
+// The Aug 5 boat cruise was dropped for a dog-friendly land day, so retire the cruise to-do & note
+// in existing sessions. Keep these byte-identical to the seeds in data.ts.
+const CRUISE_DROPPED_TODO = '🚤 Cancel & refund the pre-booked Pictured Rocks cruise — going by land instead (dogs can\'t board the boats)';
+const CRUISE_DROPPED_NOTE = '🚤 Pictured Rocks plan: doing it BY LAND on Aug 5 (Day 4) — Miners Castle cliffs + Miners Beach, both dog-friendly so Fitzy stays with us. Dogs can\'t board the tour boats, so cancel/refund the pre-booked cruise tickets.';
 
 export default function App() {
   const [itinerary, setItinerary] = useState<ItineraryDay[]>(() => {
@@ -173,8 +180,16 @@ export default function App() {
 
     setItinerary(INITIAL_ITINERARY);
     setCompletedStops([]);
-    setNotes(prev => prev.map(n => ({ ...n, text: patchDayRefs(n.text) })));
-    setTodoList(prev => prev.map(p => ({ ...p, text: patchDayRefs(p.text) })));
+    setNotes(prev => prev.map(n =>
+      n.text.includes('Pictured Rocks cruise departs')
+        ? { ...n, text: CRUISE_DROPPED_NOTE }
+        : { ...n, text: patchDayRefs(n.text) }
+    ));
+    setTodoList(prev => prev.map(p =>
+      p.text.includes('Pre-book Pictured Rocks cruise')
+        ? { ...p, text: CRUISE_DROPPED_TODO, checked: false }
+        : { ...p, text: patchDayRefs(p.text) }
+    ));
     setActiveDayNumber(1);
     localStorage.setItem('family_trip_schema_version', TRIP_SCHEMA_VERSION);
   }, []);
