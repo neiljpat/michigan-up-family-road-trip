@@ -23,39 +23,27 @@ import {
   Heart
 } from 'lucide-react';
 
-import { ItineraryDay, ItineraryItem, PackingItem, QuickNote } from './types';
-import { INITIAL_ITINERARY, INITIAL_PACKING_LIST, INITIAL_NOTES } from './data';
+import { ItineraryItem, PackingItem, QuickNote } from './types';
+import { TRIP_VARIANTS, DEFAULT_VARIANT_ID, INITIAL_PACKING_LIST, INITIAL_NOTES } from './data';
 import TripMap from './components/TripMap';
+import TripVariantPicker from './components/TripVariantPicker';
 import TodoChecklist from './components/TodoChecklist';
 import QuickNotes from './components/QuickNotes';
 
-// Bump this whenever the canonical itinerary STRUCTURE changes (days added/removed/reordered).
-// On a version mismatch we re-seed the itinerary so existing localStorage sessions pick up the
-// new plan instead of being pinned to a stale saved copy.
-// v2 (2026-06-15): departure slipped to Aug 2 → trip compressed to 8 days (was 9), Lakeside
-// Basecamp rest day dropped, cruise kept anchored on Aug 5.
-// v3 (2026-06-15): Aug 5 boat cruise dropped — replaced with a dog-friendly "Pictured Rocks by
-// land" day (Miners Castle + Miners Beach) so Fitzy is never left alone; cruise to-do/note retired.
-const TRIP_SCHEMA_VERSION = '2026-08-05-byland';
-
-// Fix day-number references in user-editable notes/to-dos when the structure shifts, without
-// discarding any booking codes the user has typed in.
-const patchDayRefs = (text: string): string =>
-  text
-    .replace('Days 2-7', 'Days 2-6')
-    .replace('Hotel (Day 8)', 'Hotel (Day 7)')
-    .replace('(Day 8 check-in)', '(Day 7 check-in)');
-
-// The Aug 5 boat cruise was dropped for a dog-friendly land day, so retire the cruise to-do & note
-// in existing sessions. Keep these byte-identical to the seeds in data.ts.
-const CRUISE_DROPPED_TODO = '🚤 Cancel & refund the pre-booked Pictured Rocks cruise — going by land instead (dogs can\'t board the boats)';
-const CRUISE_DROPPED_NOTE = '🚤 Pictured Rocks plan: doing it BY LAND on Aug 5 (Day 4) — Miners Castle cliffs + Miners Beach, both dog-friendly so Fitzy stays with us. Dogs can\'t board the tour boats, so cancel/refund the pre-booked cruise tickets.';
+// Bump when the trip data model changes so existing localStorage sessions re-seed cleanly.
+// v4 (2026-06-15): introduced selectable trip variants (Max Chill / Keep Mackinac / Keep
+// Tahquamenon / Do It All). The itinerary is now variant-driven, not a single saved array.
+const TRIP_SCHEMA_VERSION = '2026-08-06-variants';
 
 export default function App() {
-  const [itinerary, setItinerary] = useState<ItineraryDay[]>(() => {
-    const saved = localStorage.getItem('family_trip_itinerary');
-    return saved ? JSON.parse(saved) : INITIAL_ITINERARY;
+  const [selectedVariantId, setSelectedVariantId] = useState<string>(() => {
+    return localStorage.getItem('family_trip_variant') || DEFAULT_VARIANT_ID;
   });
+
+  // The chosen variant drives the whole plan (days, map, stats). It isn't editable, so only the
+  // *choice* is persisted — never a copy of the itinerary blob (that was the old stale-cache bug).
+  const variant = TRIP_VARIANTS.find(v => v.id === selectedVariantId) ?? TRIP_VARIANTS[0];
+  const itinerary = variant.itinerary;
 
   const [todoList, setTodoList] = useState<PackingItem[]>(() => {
     const saved = localStorage.getItem('family_trip_todos') || localStorage.getItem('family_trip_packing');
@@ -86,8 +74,8 @@ export default function App() {
 
   // Persist States
   useEffect(() => {
-    localStorage.setItem('family_trip_itinerary', JSON.stringify(itinerary));
-  }, [itinerary]);
+    localStorage.setItem('family_trip_variant', selectedVariantId);
+  }, [selectedVariantId]);
 
   useEffect(() => {
     localStorage.setItem('family_trip_todos', JSON.stringify(todoList));
@@ -106,90 +94,20 @@ export default function App() {
     localStorage.setItem('family_trip_item_custom_notes', JSON.stringify(itemCustomNotes));
   }, [itemCustomNotes]);
 
-  // Auto-migration for existing localStorage user sessions to display new lodging to-dos and placeholders
-  useEffect(() => {
-    let hasChanged = false;
-    let updatedNotes = [...notes];
-    let updatedPacking = [...todoList];
-
-    const oldAirbnbNoteText = "Airbnb reservation: Confirmation code HMSTAY12UP - Keypad code 8008. Dog friendly deposit for Fitzy completed.";
-    const oldHotelNoteText = "Green Bay Hotel reservation: Confirmation 65543DOG - check in 3:00 PM. Indoor pool has an amazing water slide for Reva & Kabir!";
-
-    // replace old Airbnb note
-    const airbnbIdx = updatedNotes.findIndex(n => n.text === oldAirbnbNoteText);
-    if (airbnbIdx !== -1) {
-      updatedNotes[airbnbIdx] = {
-        ...updatedNotes[airbnbIdx],
-        text: "🏡 Au Train Lake Cabin (Days 2-6): [NOT BOOKED YET] - Edit this note to add your Airbnb/cabin confirmation code, keypad, and address when booked."
-      };
-      hasChanged = true;
-    }
-
-    // replace old Hotel note
-    const hotelIdx = updatedNotes.findIndex(n => n.text === oldHotelNoteText);
-    if (hotelIdx !== -1) {
-      updatedNotes[hotelIdx] = {
-        ...updatedNotes[hotelIdx],
-        text: "🏨 Green Bay Hotel (Day 1): [NOT BOOKED YET] - Edit this note to add your hotel confirmation code, check-in, and address when booked."
-      };
-      hasChanged = true;
-    }
-
-    // add Gaylord hotel placeholder note if not exists
-    if (!updatedNotes.some(n => n.text.includes("Gaylord / Grand Rapids Hotel (Day 7)"))) {
-      updatedNotes.push({
-        id: "n1.5-migrated",
-        text: "🏨 Gaylord / Grand Rapids Hotel (Day 7): [NOT BOOKED YET] - Edit this note to add your hotel confirmation, check-in, and address when booked.",
-        timestamp: "2026-06-14T15:50:00-07:00",
-        category: "Lodging"
-      });
-      hasChanged = true;
-    }
-
-    // Migrate packing items
-    const lodgingToDos: PackingItem[] = [
-      { id: "p-lodging-1", text: "🏨 Book dog-friendly hotel in Green Bay, WI (Day 1 check-in)", category: "General", checked: false },
-      { id: "p-lodging-2", text: "🏡 Book dog-friendly Au Train Airbnb/lake cabin (Days 2-6 check-in)", category: "General", checked: false },
-      { id: "p-lodging-3", text: "🏨 Book dog-friendly hotel/lodge near Gaylord/Traverse City (Day 7 check-in)", category: "General", checked: false }
-    ];
-
-    lodgingToDos.forEach(todo => {
-      // check if a todo with matching text or ID already exists in the packing list
-      const existsId = updatedPacking.some(p => p.id === todo.id);
-      const existsText = updatedPacking.some(p => p.text.toLowerCase().includes("book dog-friendly hotel") || p.text.toLowerCase().includes("book dog-friendly au train"));
-      
-      if (!existsId && !existsText) {
-        updatedPacking.splice(4, 0, todo);
-        hasChanged = true;
-      }
-    });
-
-    if (hasChanged) {
-      setNotes(updatedNotes);
-      setTodoList(updatedPacking);
-    }
-  }, []);
-
-  // One-time re-seed when the itinerary structure version changes. The itinerary itself holds no
-  // user-authored content, so it's safe to refresh to the latest plan. Completed-stop checkmarks
-  // are keyed to the old day/stop IDs, so we clear them to re-map cleanly against the new days.
-  // Notes & to-dos keep the user's text but get their day-number references patched.
+  // One-time re-seed when the data model changes (see TRIP_SCHEMA_VERSION). The itinerary is now
+  // variant-driven, so any old saved itinerary blob is obsolete; stop-keyed state is cleared and the
+  // notes/to-dos refresh to the latest variant-agnostic seeds. Lands the family on the default
+  // (Max Chill) so they start the conversation from the relaxed end.
   useEffect(() => {
     const storedVersion = localStorage.getItem('family_trip_schema_version');
     if (storedVersion === TRIP_SCHEMA_VERSION) return;
 
-    setItinerary(INITIAL_ITINERARY);
+    localStorage.removeItem('family_trip_itinerary');
     setCompletedStops([]);
-    setNotes(prev => prev.map(n =>
-      n.text.includes('Pictured Rocks cruise departs')
-        ? { ...n, text: CRUISE_DROPPED_NOTE }
-        : { ...n, text: patchDayRefs(n.text) }
-    ));
-    setTodoList(prev => prev.map(p =>
-      p.text.includes('Pre-book Pictured Rocks cruise')
-        ? { ...p, text: CRUISE_DROPPED_TODO, checked: false }
-        : { ...p, text: patchDayRefs(p.text) }
-    ));
+    setItemCustomNotes({});
+    setNotes(INITIAL_NOTES);
+    setTodoList(INITIAL_PACKING_LIST);
+    setSelectedVariantId(DEFAULT_VARIANT_ID);
     setActiveDayNumber(1);
     localStorage.setItem('family_trip_schema_version', TRIP_SCHEMA_VERSION);
   }, []);
@@ -267,7 +185,8 @@ export default function App() {
       localStorage.removeItem('family_trip_notes');
       localStorage.removeItem('family_trip_completed_stops');
       localStorage.removeItem('family_trip_item_custom_notes');
-      setItinerary(INITIAL_ITINERARY);
+      localStorage.removeItem('family_trip_variant');
+      setSelectedVariantId(DEFAULT_VARIANT_ID);
       setTodoList(INITIAL_PACKING_LIST);
       setNotes(INITIAL_NOTES);
       setCompletedStops([]);
@@ -359,12 +278,17 @@ export default function App() {
 
           {/* Main Structural Layout Grid */}
           <main className="p-6">
+            <TripVariantPicker
+              variants={TRIP_VARIANTS}
+              selectedId={selectedVariantId}
+              onSelect={setSelectedVariantId}
+            />
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* LEFT WING - MAP & COLLABORATIVE CHECKS (SPAN 5) */}
               <section className="lg:col-span-5 space-y-8">
                 {/* Interactive geographic route map */}
-                <TripMap activeDay={activeDayNumber} onSelectDay={setActiveDayNumber} />
+                <TripMap activeDay={activeDayNumber} onSelectDay={setActiveDayNumber} route={variant.route} />
 
                 {/* Widgets Toggling Bar */}
                 <div className="bg-[#F1EEE5] border border-art-charcoal/10 p-1.5 rounded-2xl flex gap-1 shadow-xs">

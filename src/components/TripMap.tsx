@@ -1,23 +1,24 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapPin, BatteryCharging, Home, Compass, Eye, Map as MapIcon, Calendar } from 'lucide-react';
-import { ROUTE_PATH_COORDINATES } from '../data';
+import { RouteStop } from '../types';
 
 interface TripMapProps {
   activeDay: number;
   onSelectDay: (day: number) => void;
+  route: RouteStop[];
 }
 
-export default function TripMap({ activeDay, onSelectDay }: TripMapProps) {
-  const [hoveredPoint, setHoveredPoint] = useState<typeof ROUTE_PATH_COORDINATES[number] | null>(null);
+export default function TripMap({ activeDay, onSelectDay, route }: TripMapProps) {
+  const [hoveredPoint, setHoveredPoint] = useState<RouteStop | null>(null);
 
   // Group coordinates to draw the path
-  const pathData = ROUTE_PATH_COORDINATES.map(p => `${p.x},${p.y}`).join(' ');
+  const pathData = route.map(p => `${p.x},${p.y}`).join(' ');
 
   // Get active point coordinates to draw a special active marker
-  const activeDayCoordinates = ROUTE_PATH_COORDINATES.filter(p => p.day === activeDay);
+  const activeDayCoordinates = route.filter(p => p.day === activeDay);
 
-  const getMarkerColor = (point: typeof ROUTE_PATH_COORDINATES[number]) => {
+  const getMarkerColor = (point: RouteStop) => {
     if (point.day === activeDay) return 'stroke-amber-500 fill-amber-500 shadow-lg';
     if (point.type === 'supercharge') return 'stroke-emerald-500 fill-emerald-500';
     if (point.type === 'airbnb') return 'stroke-blue-500 fill-blue-500';
@@ -167,7 +168,7 @@ export default function TripMap({ activeDay, onSelectDay }: TripMapProps) {
           ))}
 
           {/* INTERACTIVE COORDINATES (PIN POINTS) */}
-          {ROUTE_PATH_COORDINATES.map((point, index) => {
+          {route.map((point, index) => {
             const isActive = point.day === activeDay;
             const isHovered = hoveredPoint?.name === point.name;
             const rVal = isActive ? 2.2 : isHovered ? 2.0 : 1.4;
