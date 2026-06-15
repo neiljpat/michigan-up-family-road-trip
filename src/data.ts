@@ -3,7 +3,7 @@ import { ItineraryDay, PackingItem, QuickNote } from './types';
 export const INITIAL_ITINERARY: ItineraryDay[] = [
   {
     dayNumber: 1,
-    date: "Saturday, Aug 1",
+    date: "Sunday, Aug 2",
     title: "Wisconsin Push",
     subtitle: "Chicago to Green Bay",
     highlight: "Amusement park fun & scenic beach stroll on the way north",
@@ -106,7 +106,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
   },
   {
     dayNumber: 2,
-    date: "Sunday, Aug 2",
+    date: "Monday, Aug 3",
     title: "UP Boundary",
     subtitle: "Green Bay into the Wilderness",
     highlight: "Crossing into the Upper Peninsula, floating over a crystal clear spring, and checking into lakeside bliss",
@@ -191,7 +191,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
   },
   {
     dayNumber: 3,
-    date: "Monday, Aug 3",
+    date: "Tuesday, Aug 4",
     title: "Pictured Rocks Debut",
     subtitle: "Waterfalls & Shallow Waters",
     highlight: "Chasing a shaded waterfall and splashing in the warmest shallow beach around",
@@ -250,84 +250,6 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
   },
   {
     dayNumber: 4,
-    date: "Tuesday, Aug 4",
-    title: "Art & Marquette Day Trip",
-    subtitle: "Iron Art & Presque Isle Playground",
-    highlight: "Giant outdoor scrap-metal sculptures and the rugged Black Rocks of Marquette",
-    stats: {
-      drivingTime: "approx. 2 hours total",
-      superchargeStopCount: 1,
-      highlights: ["Lakenenland Sculpture Park", "Presque Isle Park", "Marquette Coast"]
-    },
-    items: [
-      {
-        id: "d4-1",
-        time: "09:00 AM",
-        label: "Breakfast at the Airbnb",
-        details: "Quick breakfast at the house and gear up for our day-trip drive west along Lake Superior.",
-        category: "food"
-      },
-      {
-        id: "d4-2",
-        time: "10:00 AM",
-        label: "Lakenenland Sculpture Park",
-        details: "An awesome, eccentric outdoor museum completely free to the public. Walk the forested half-mile loop finding massive, creative scrap-metal statues (dinosaurs, dragons, humorous dioramas). Extremely friendly for Fitzy and a total favorite for Reva & Kabir's imagination.",
-        category: "activity",
-        isDogFriendly: true,
-        isKidFriendly: true,
-        duration: "1.5 hours",
-        location: "Shot Point, MI"
-      },
-      {
-        id: "d4-3",
-        time: "11:30 AM",
-        label: "Continue Drive to Marquette",
-        details: "Beautiful forested highway drive as you approach the largest city in the UP.",
-        category: "travel",
-        duration: "30 mins"
-      },
-      {
-        id: "d4-4",
-        time: "12:00 PM",
-        label: "Lunch in Downtown Marquette",
-        details: "Sit down at a classic local brewery or an outdoor cafe with street views. Great local food and craft root beer for Reva & Kabir.",
-        category: "food",
-        duration: "1.5 hours",
-        location: "Marquette, MI"
-      },
-      {
-        id: "d4-5",
-        time: "01:30 PM",
-        label: "Supercharge: Marquette Meijer",
-        details: "Top off your battery at Marquette's supercharger. Since you are in town, this is key for worry-free local exploration during the rest of the week.",
-        category: "charge",
-        isTeslaSupercharge: true,
-        duration: "30 mins",
-        location: "Meijer, Marquette, MI"
-      },
-      {
-        id: "d4-6",
-        time: "02:15 PM",
-        label: "Presque Isle Park",
-        details: "Drive the narrow forest loop, visit the majestic Black Rocks (stunning dark volcanic cliffs rising out of Superior—watch people cliff-jump!). Let Reva and Kabir go absolutely wild at the stellar public playground, while Fitzy walks on leash under massive hemlock trees.",
-        category: "activity",
-        isDogFriendly: true,
-        isKidFriendly: true,
-        duration: "2 hours",
-        location: "Marquette, MI"
-      },
-      {
-        id: "d4-7",
-        time: "04:30 PM",
-        label: "Easy Return Drive & Home Cooked Dinner",
-        details: "Wind back to your peaceful Au Train home. Wrap up with a cozy, simple pasta family dinner and early bedtime.",
-        category: "travel",
-        location: "Au Train, MI"
-      }
-    ]
-  },
-  {
-    dayNumber: 5,
     date: "Wednesday, Aug 5",
     title: "Pictured Rocks Cruise",
     subtitle: "Cliffs from the Water & Famous Overlooks",
@@ -339,14 +261,14 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
     },
     items: [
       {
-        id: "d5-1",
+        id: "d4-1",
         time: "08:30 AM",
         label: "Early Airbnb Breakfast",
         details: "Fuel up early to make sure you get to the Munising harbor with modern ease.",
         category: "food"
       },
       {
-        id: "d5-2",
+        id: "d4-2",
         time: "09:30 AM",
         label: "Arrive at Munising Cruise Harbor",
         details: "Park easily in the dedicated harbor lots. Get ready to board the big catamaran.",
@@ -354,7 +276,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         location: "Munising Dock, MI"
       },
       {
-        id: "d5-3",
+        id: "d4-3",
         time: "09:45 AM",
         label: "Settle Fitzy into Shaded Harbor Kennels",
         details: "Since dogs aren't allowed on the main cruise, the tour company provides completely FREE, highly shaded, safe, on-site kennels. Bring Fitzy's favorite plush dog bed, chew toy, and water. The attendants keep a wonderful eye on him!",
@@ -363,7 +285,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "15 mins"
       },
       {
-        id: "d5-4",
+        id: "d4-4",
         time: "10:00 AM",
         label: "Pictured Rocks Boat Cruise",
         details: "Board the 2.5-hour classic boat tour. The vessel glides right alongside the famous painted mineral-streaked sandstone cliffs, caves, and arches (Miners Castle, Battleship Rocks, East Channel Light). Reva & Kabir will love the top deck sea breeze!",
@@ -372,7 +294,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "2.5 hours"
       },
       {
-         id: "d5-5",
+         id: "d4-5",
          time: "12:30 PM",
          label: "Retrieve Fitzy & Eat Hot local Pasties!",
          details: "Pick up your happy, rested dog Fitzy from the kennel. Drive just 2 minutes down the block to 'Muldoons' to grab authentic UP Pasties! Flaky beef or veggie pies that are a UP custom.",
@@ -382,7 +304,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
          location: "Muldoons Pasties, Munising, MI"
       },
       {
-        id: "d5-6",
+        id: "d4-6",
         time: "01:30 PM",
         label: "Miners Castle Overlook",
         details: "Drive east into the park. Walk the beautifully paved, 5-minute flat path to look down at the gorgeous, turret-like Miners Castle formation and the neon turquoise waters of Lake Superior. Easily stroller-friendly or walking-friendly for Kabir and Reva.",
@@ -392,7 +314,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "1 hour"
       },
       {
-        id: "d5-7",
+        id: "d4-7",
         time: "03:00 PM",
         label: "Return to Airbnb: Swimming & Rest",
         details: "Spend a beautiful, slow late-afternoon paddling, swimming, and relaxing around your rental property. Let Reva & Kabir float and Fitzy nap on the deck.",
@@ -401,15 +323,93 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
     ]
   },
   {
-    dayNumber: 6,
+    dayNumber: 5,
     date: "Thursday, Aug 6",
+    title: "Art & Marquette Day Trip",
+    subtitle: "Iron Art & Presque Isle Playground",
+    highlight: "Giant outdoor scrap-metal sculptures and the rugged Black Rocks of Marquette",
+    stats: {
+      drivingTime: "approx. 2 hours total",
+      superchargeStopCount: 1,
+      highlights: ["Lakenenland Sculpture Park", "Presque Isle Park", "Marquette Coast"]
+    },
+    items: [
+      {
+        id: "d5-1",
+        time: "09:00 AM",
+        label: "Breakfast at the Airbnb",
+        details: "Quick breakfast at the house and gear up for our day-trip drive west along Lake Superior.",
+        category: "food"
+      },
+      {
+        id: "d5-2",
+        time: "10:00 AM",
+        label: "Lakenenland Sculpture Park",
+        details: "An awesome, eccentric outdoor museum completely free to the public. Walk the forested half-mile loop finding massive, creative scrap-metal statues (dinosaurs, dragons, humorous dioramas). Extremely friendly for Fitzy and a total favorite for Reva & Kabir's imagination.",
+        category: "activity",
+        isDogFriendly: true,
+        isKidFriendly: true,
+        duration: "1.5 hours",
+        location: "Shot Point, MI"
+      },
+      {
+        id: "d5-3",
+        time: "11:30 AM",
+        label: "Continue Drive to Marquette",
+        details: "Beautiful forested highway drive as you approach the largest city in the UP.",
+        category: "travel",
+        duration: "30 mins"
+      },
+      {
+        id: "d5-4",
+        time: "12:00 PM",
+        label: "Lunch in Downtown Marquette",
+        details: "Sit down at a classic local brewery or an outdoor cafe with street views. Great local food and craft root beer for Reva & Kabir.",
+        category: "food",
+        duration: "1.5 hours",
+        location: "Marquette, MI"
+      },
+      {
+        id: "d5-5",
+        time: "01:30 PM",
+        label: "Supercharge: Marquette Meijer",
+        details: "Top off your battery at Marquette's supercharger. Since you are in town, this is key for worry-free local exploration through the back half of the week.",
+        category: "charge",
+        isTeslaSupercharge: true,
+        duration: "30 mins",
+        location: "Meijer, Marquette, MI"
+      },
+      {
+        id: "d5-6",
+        time: "02:15 PM",
+        label: "Presque Isle Park",
+        details: "Drive the narrow forest loop, visit the majestic Black Rocks (stunning dark volcanic cliffs rising out of Superior—watch people cliff-jump!). Let Reva and Kabir go absolutely wild at the stellar public playground, while Fitzy walks on leash under massive hemlock trees.",
+        category: "activity",
+        isDogFriendly: true,
+        isKidFriendly: true,
+        duration: "2 hours",
+        location: "Marquette, MI"
+      },
+      {
+        id: "d5-7",
+        time: "04:30 PM",
+        label: "Easy Return Drive & Home Cooked Dinner",
+        details: "Wind back to your peaceful Au Train home. Wrap up with a cozy, simple pasta family dinner and early bedtime.",
+        category: "travel",
+        location: "Au Train, MI"
+      }
+    ]
+  },
+  {
+    dayNumber: 6,
+    date: "Friday, Aug 7",
     title: "Tahquamenon Falls",
     subtitle: "Root Beer Cascades & Island Rowboats",
-    highlight: "Exploring the famous amber-colored falls and rowing to an island of mini-waterfalls",
+    highlight: "Exploring the famous amber-colored falls, rowing to an island of mini-waterfalls, and a final campfire on our last lake night",
     stats: {
       drivingTime: "approx. 3 hours total",
       superchargeStopCount: 0,
-      highlights: ["Upper Tahquamenon Falls", "Lower Falls Rowboats", "Brewery Lunch"]
+      highlights: ["Upper Tahquamenon Falls", "Lower Falls Rowboats", "Brewery Lunch", "Final Campfire & S'mores"]
     },
     items: [
       {
@@ -462,64 +462,9 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
       },
       {
         id: "d6-6",
-        time: "05:00 PM",
-        label: "Easy Local Takeout Dinner",
-        details: "Order takeout or cook something quick. Let Fitzy rest his paws while we watch the sunset.",
-        category: "food"
-      }
-    ]
-  },
-  {
-    dayNumber: 7,
-    date: "Friday, Aug 7",
-    title: "Lakeside Basecamp",
-    subtitle: "Pancakes & Paddles",
-    highlight: "An entire slow day dedicated to canoeing, sandcastles, and s'mores at our home lake",
-    stats: {
-      drivingTime: "0 hours",
-      superchargeStopCount: 0,
-      highlights: ["Pancake Breakfast", "Canoe & Kayak", "Evening Campfire & S'mores"]
-    },
-    items: [
-      {
-        id: "d7-1",
-        time: "09:00 AM",
-        label: "Giant Family Pancake Breakfast",
-        details: "Whip up a massive batch of buttermilk pancakes for Reva & Kabir. Drizzle real maple syrup and enjoy a long slow feast in your pajamas.",
-        category: "food",
-        isKidFriendly: true
-      },
-      {
-        id: "d7-2",
-        time: "10:30 AM",
-        label: "Paddling the Lake/River",
-        details: "Stay right at home. Launch the kayaks, canoes, or paddleboards (either provided by Airbnb or rented down the street). Paddle the calm, warm inland waters. Fitzy will love riding on the bow of a slow canoe!",
-        category: "activity",
-        isDogFriendly: true,
-        isKidFriendly: true,
-        duration: "2 hours"
-      },
-      {
-        id: "d7-3",
-        time: "12:30 PM",
-        label: "Casual Cottage Lunch",
-        details: "Comfortable picnic style lunch on the grass or back deck of the Airbnb.",
-        category: "food"
-      },
-      {
-        id: "d7-4",
-        time: "02:00 PM",
-        label: "Sandcastles, Reading & Packing Prep",
-        details: "Spend the afternoon on the shore. Build massive fort sandcastles with Reva & Kabir, read on the deck chairs, and slowly pack up non-essential beach gear to keep tomorrow stress-free.",
-        category: "activity",
-        isKidFriendly: true,
-        duration: "3 hours"
-      },
-      {
-        id: "d7-5",
         time: "06:00 PM",
-        label: "Final UP Campfire Feast",
-        details: "Throw a final cookout, fire up a gorgeous pinewood pit, roast marshmallows, assemble classic s'mores, and tell stories of the giant lake monster as stars come out over the UP.",
+        label: "Final UP Campfire Feast (Last Lake Night)",
+        details: "Your last evening at the Au Train cabin. Fire up the pinewood pit, throw a final cookout, roast marshmallows, and assemble classic s'mores with Reva & Kabir. Tell stories of the giant lake monster as the stars come out over Superior — then pack up the non-essential beach gear so tomorrow's Mackinac departure is smooth.",
         category: "food",
         isKidFriendly: true,
         isDogFriendly: true
@@ -527,7 +472,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
     ]
   },
   {
-    dayNumber: 8,
+    dayNumber: 7,
     date: "Saturday, Aug 8",
     title: "Mackinac Island Magic",
     subtitle: "Ferry Rides & Bicycle Perimeters",
@@ -539,7 +484,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
     },
     items: [
       {
-        id: "d8-1",
+        id: "d7-1",
         time: "08:00 AM",
         label: "Check-out & Head to St. Ignace",
         details: "Lock up the Airbnb, say goodbye to the lake, and take the swift state highway east to the Straits of Mackinac (~1.5 hours).",
@@ -547,7 +492,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "1.5 hours"
       },
       {
-        id: "d8-2",
+        id: "d7-2",
         time: "10:00 AM",
         label: "Board Shepler's Mackinac Island Ferry",
         details: "Hop onto the catamaran ferry! It's a gorgeous 15-minute boat ride. Stand at the open-air stern to feel the spray and see the Mackinac Bridge. Fitzy rides completely free on the ferry deck!",
@@ -558,7 +503,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         location: "St. Ignace Dock, MI"
       },
       {
-        id: "d8-3",
+        id: "d7-3",
         time: "10:30 AM",
         label: "Rent Island Bikes & 8-Mile Coastal Loop",
         details: "Mackinac is famous for having absolutely zero cars! Rent bicycles directly off the pier. Rent a secure trailer for Reva & Kabir, and a cute front basket for Fitzy. Ride M-185, the iconic, flat, fully paved 8-mile loop around the entire perimeter of the island, with beautiful turquoise waves crashing beside you.",
@@ -569,7 +514,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         location: "Mackinac Island, MI"
       },
       {
-        id: "d8-4",
+        id: "d7-4",
         time: "12:30 PM",
         label: "Island Lunch & Fudge Shopping",
         details: "Grab a delicious lunch on Main Street and visit iconic candy shops to let Reva & Kabir watch them pour legendary chocolate fudge on marble slabs. Buy a box for the car!",
@@ -578,7 +523,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "1.5 hours"
       },
       {
-        id: "d8-5",
+        id: "d7-5",
         time: "02:00 PM",
         label: "Ferry Return to Mainland",
         details: "Take the boat back to Saint Ignace and hop into the Tesla.",
@@ -586,7 +531,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "30 mins"
       },
       {
-        id: "d8-6",
+        id: "d7-6",
         time: "02:30 PM",
         label: "Drive South over the Great Mackinac Bridge",
         details: "Drive across the spectacular 5-mile suspension bridge, looking down at Lake Michigan on your right and Lake Huron on your left.",
@@ -594,7 +539,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "30 mins"
       },
       {
-        id: "d8-7",
+        id: "d7-7",
         time: "03:00 PM",
         label: "Supercharge: Mackinaw City",
         details: "Quick convenience charge immediately upon crossing the bridge so you are ready for the Lower Michigan highway run.",
@@ -604,7 +549,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         location: "Mackinaw City, MI"
       },
       {
-        id: "d8-8",
+        id: "d7-8",
         time: "03:30 PM",
         label: "Drive to Halfway Stop (Gaylord/Traverse City)",
         details: "Head south into the Lower Peninsula woods toward your dog-friendly hotel (~1.5 hours).",
@@ -612,7 +557,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "1.5 hours"
       },
       {
-        id: "d8-9",
+        id: "d7-9",
         time: "05:30 PM",
         label: "Settle into Hotel & Celebration Family Dinner",
         details: "Check into your dog-friendly suite. Head out to a cozy sit-down tavern or local brewery to celebrate the amazing UP memories and accomplishments with Archana and the kids!",
@@ -622,7 +567,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
     ]
   },
   {
-    dayNumber: 9,
+    dayNumber: 8,
     date: "Sunday, Aug 9",
     title: "Homeward Bound",
     subtitle: "Lower Michigan to Chicago",
@@ -634,7 +579,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
     },
     items: [
       {
-        id: "d9-1",
+        id: "d8-1",
         time: "08:30 AM",
         label: "Hotel Breakfast & Highway South",
         details: "Fuel up, load the luggage, and head south down US-131 on a smooth driving lane toward Chicago.",
@@ -642,7 +587,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "2 hours"
       },
       {
-        id: "d9-2",
+        id: "d8-2",
         time: "10:30 AM",
         label: "Supercharge: Grand Rapids / Kalamazoo",
         details: "Quick top-off at the Meijer Supercharger. Grab a hot coffee, run around the grass with Reva and Kabir, and let Fitzy stretch his paws.",
@@ -651,7 +596,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "30 mins"
       },
       {
-        id: "d9-3",
+        id: "d8-3",
         time: "11:00 AM",
         label: "The Final Stretching Highway Run",
         details: "Smooth cruising down toward Indiana dunes and Chicago skyline.",
@@ -659,7 +604,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "2.5 hours"
       },
       {
-        id: "d9-4",
+        id: "d8-4",
         time: "01:30 PM",
         label: "Border Crossing Lunch Stop",
         details: "Stop for a relaxed diner lunch just over the border in Indiana or Illinois to ease the final transition.",
@@ -667,7 +612,7 @@ export const INITIAL_ITINERARY: ItineraryDay[] = [
         duration: "1 hour"
       },
       {
-        id: "d9-5",
+        id: "d8-5",
         time: "03:30 PM",
         label: "Arrive Home in Chicago!",
         details: "Pull back into your driveway. Plenty of daylight left to unload the car cooler, start a load of laundry, and let everyone rest and get ready for the regular week.",
@@ -684,8 +629,8 @@ export const INITIAL_PACKING_LIST: PackingItem[] = [
   { id: "p3", text: "🎫 Aquire Wisconsin State Park pass (or buy day passes)", category: "General", checked: false },
   { id: "p4", text: "🌲 Buy Michigan Recreation Passport (handles Palms Book & Tahquamenon Falls)", category: "General", checked: false },
   { id: "p-lodging-1", text: "🏨 Book dog-friendly hotel in Green Bay, WI (Day 1 check-in)", category: "General", checked: false },
-  { id: "p-lodging-2", text: "🏡 Book dog-friendly Au Train Airbnb/lake cabin (Days 2-7 check-in)", category: "General", checked: false },
-  { id: "p-lodging-3", text: "🏨 Book dog-friendly hotel/lodge near Gaylord/Traverse City (Day 8 check-in)", category: "General", checked: false },
+  { id: "p-lodging-2", text: "🏡 Book dog-friendly Au Train Airbnb/lake cabin (Days 2-6 check-in)", category: "General", checked: false },
+  { id: "p-lodging-3", text: "🏨 Book dog-friendly hotel/lodge near Gaylord/Traverse City (Day 7 check-in)", category: "General", checked: false },
   { id: "p5", text: "🦮 Bring Fitzy's 10ft leash (required for State/National Park trails)", category: "Fitzy (Dog)", checked: false },
   { id: "p6", text: "📦 Pack Fitzy's crate or portable playpen for cabin stays", category: "Fitzy (Dog)", checked: false },
   { id: "p7", text: "🧸 Pack Fitzy's plush dog bed, chew toys, and favorite blanket", category: "Fitzy (Dog)", checked: false },
@@ -705,7 +650,7 @@ export const INITIAL_PACKING_LIST: PackingItem[] = [
 export const INITIAL_NOTES: QuickNote[] = [
   {
     id: "n1",
-    text: "🏡 Au Train Lake Cabin (Days 2-7): [NOT BOOKED YET] - Edit this note to add your Airbnb/cabin confirmation code, keypad, and address when booked.",
+    text: "🏡 Au Train Lake Cabin (Days 2-6): [NOT BOOKED YET] - Edit this note to add your Airbnb/cabin confirmation code, keypad, and address when booked.",
     timestamp: "2026-06-14T15:30:00-07:00",
     category: "Lodging"
   },
@@ -717,13 +662,13 @@ export const INITIAL_NOTES: QuickNote[] = [
   },
   {
     id: "n1.5",
-    text: "🏨 Gaylord / Grand Rapids Hotel (Day 8): [NOT BOOKED YET] - Edit this note to add your hotel confirmation, check-in, and address when booked.",
+    text: "🏨 Gaylord / Grand Rapids Hotel (Day 7): [NOT BOOKED YET] - Edit this note to add your hotel confirmation, check-in, and address when booked.",
     timestamp: "2026-06-14T15:50:00-07:00",
     category: "Lodging"
   },
   {
     id: "n3",
-    text: "Pictured Rocks cruise departs at 10:00 AM sharp on Aug 5. Need to be at the dock by 9:30 to drop off Fitzy in the harbor kennels.",
+    text: "Pictured Rocks cruise departs at 10:00 AM sharp on Aug 5 (Day 4). Need to be at the dock by 9:30 to drop off Fitzy in the harbor kennels.",
     timestamp: "2026-06-14T16:00:00-07:00",
     category: "Activities"
   }
@@ -737,12 +682,12 @@ export const ROUTE_PATH_COORDINATES: { name: string; x: number; y: number; day: 
   { name: "Escanaba Charger", x: 39, y: 36, day: 2, desc: "Supercharge & Grocery Run (10:30 AM)", type: 'supercharge' },
   { name: "Kitch-iti-kipi Spring", x: 50, y: 31, day: 2, desc: "Ferry over Big Spring (12:15 PM)", type: 'activity' },
   { name: "Munising / Au Train Airbnb", x: 49, y: 22, day: 2, desc: "Lakeside Basecamp Airbnb Check-in", type: 'airbnb' },
-  { name: "Marquette Day Trip", x: 35, y: 19, day: 4, desc: "Presque Isle Park & Meijer Charger", type: 'activity' },
+  { name: "Marquette Day Trip", x: 35, y: 19, day: 5, desc: "Presque Isle Park & Meijer Charger", type: 'activity' },
   { name: "Upper Tahquamenon Falls", x: 74, y: 22, day: 6, desc: "Root Beer Amber Cascades", type: 'activity' },
-  { name: "Saint Ignace Ferry", x: 80, y: 28, day: 8, desc: "Mackinac Ferry Departure", type: 'stop' },
-  { name: "Mackinac Island", x: 84, y: 26, day: 8, desc: "8-Mile bike loop perimeter & Fudge", type: 'activity' },
-  { name: "Mackinaw City Charger", x: 80, y: 32, day: 8, desc: "Post-Bridge Supercharger (3:00 PM)", type: 'supercharge' },
-  { name: "Gaylord (Halfway)", x: 78, y: 44, day: 8, desc: "Check in Hotel (5:30 PM)", type: 'stop' },
-  { name: "Grand Rapids Charger", x: 69, y: 65, day: 9, desc: "Supercharge & restroom run", type: 'supercharge' },
-  { name: "Chicago Home", x: 42, y: 92, day: 9, desc: "Arrive 3:30 PM", type: 'origin' }
+  { name: "Saint Ignace Ferry", x: 80, y: 28, day: 7, desc: "Mackinac Ferry Departure", type: 'stop' },
+  { name: "Mackinac Island", x: 84, y: 26, day: 7, desc: "8-Mile bike loop perimeter & Fudge", type: 'activity' },
+  { name: "Mackinaw City Charger", x: 80, y: 32, day: 7, desc: "Post-Bridge Supercharger (3:00 PM)", type: 'supercharge' },
+  { name: "Gaylord (Halfway)", x: 78, y: 44, day: 7, desc: "Check in Hotel (5:30 PM)", type: 'stop' },
+  { name: "Grand Rapids Charger", x: 69, y: 65, day: 8, desc: "Supercharge & restroom run", type: 'supercharge' },
+  { name: "Chicago Home", x: 42, y: 92, day: 8, desc: "Arrive 3:30 PM", type: 'origin' }
 ];

@@ -29,6 +29,21 @@ import TripMap from './components/TripMap';
 import TodoChecklist from './components/TodoChecklist';
 import QuickNotes from './components/QuickNotes';
 
+// Bump this whenever the canonical itinerary STRUCTURE changes (days added/removed/reordered).
+// On a version mismatch we re-seed the itinerary so existing localStorage sessions pick up the
+// new plan instead of being pinned to a stale saved copy.
+// v2 (2026-06-15): departure slipped to Aug 2 → trip compressed to 8 days (was 9), Lakeside
+// Basecamp rest day dropped, cruise kept anchored on Aug 5.
+const TRIP_SCHEMA_VERSION = '2026-08-02-8day';
+
+// Fix day-number references in user-editable notes/to-dos when the structure shifts, without
+// discarding any booking codes the user has typed in.
+const patchDayRefs = (text: string): string =>
+  text
+    .replace('Days 2-7', 'Days 2-6')
+    .replace('Hotel (Day 8)', 'Hotel (Day 7)')
+    .replace('(Day 8 check-in)', '(Day 7 check-in)');
+
 export default function App() {
   const [itinerary, setItinerary] = useState<ItineraryDay[]>(() => {
     const saved = localStorage.getItem('family_trip_itinerary');
@@ -98,7 +113,7 @@ export default function App() {
     if (airbnbIdx !== -1) {
       updatedNotes[airbnbIdx] = {
         ...updatedNotes[airbnbIdx],
-        text: "🏡 Au Train Lake Cabin (Days 2-7): [NOT BOOKED YET] - Edit this note to add your Airbnb/cabin confirmation code, keypad, and address when booked."
+        text: "🏡 Au Train Lake Cabin (Days 2-6): [NOT BOOKED YET] - Edit this note to add your Airbnb/cabin confirmation code, keypad, and address when booked."
       };
       hasChanged = true;
     }
@@ -113,11 +128,11 @@ export default function App() {
       hasChanged = true;
     }
 
-    // add Day 8 hotel placeholder note if not exists
-    if (!updatedNotes.some(n => n.text.includes("Gaylord / Grand Rapids Hotel (Day 8)"))) {
+    // add Gaylord hotel placeholder note if not exists
+    if (!updatedNotes.some(n => n.text.includes("Gaylord / Grand Rapids Hotel (Day 7)"))) {
       updatedNotes.push({
         id: "n1.5-migrated",
-        text: "🏨 Gaylord / Grand Rapids Hotel (Day 8): [NOT BOOKED YET] - Edit this note to add your hotel confirmation, check-in, and address when booked.",
+        text: "🏨 Gaylord / Grand Rapids Hotel (Day 7): [NOT BOOKED YET] - Edit this note to add your hotel confirmation, check-in, and address when booked.",
         timestamp: "2026-06-14T15:50:00-07:00",
         category: "Lodging"
       });
@@ -127,8 +142,8 @@ export default function App() {
     // Migrate packing items
     const lodgingToDos: PackingItem[] = [
       { id: "p-lodging-1", text: "🏨 Book dog-friendly hotel in Green Bay, WI (Day 1 check-in)", category: "General", checked: false },
-      { id: "p-lodging-2", text: "🏡 Book dog-friendly Au Train Airbnb/lake cabin (Days 2-7 check-in)", category: "General", checked: false },
-      { id: "p-lodging-3", text: "🏨 Book dog-friendly hotel/lodge near Gaylord/Traverse City (Day 8 check-in)", category: "General", checked: false }
+      { id: "p-lodging-2", text: "🏡 Book dog-friendly Au Train Airbnb/lake cabin (Days 2-6 check-in)", category: "General", checked: false },
+      { id: "p-lodging-3", text: "🏨 Book dog-friendly hotel/lodge near Gaylord/Traverse City (Day 7 check-in)", category: "General", checked: false }
     ];
 
     lodgingToDos.forEach(todo => {
@@ -146,6 +161,22 @@ export default function App() {
       setNotes(updatedNotes);
       setTodoList(updatedPacking);
     }
+  }, []);
+
+  // One-time re-seed when the itinerary structure version changes. The itinerary itself holds no
+  // user-authored content, so it's safe to refresh to the latest plan. Completed-stop checkmarks
+  // are keyed to the old day/stop IDs, so we clear them to re-map cleanly against the new days.
+  // Notes & to-dos keep the user's text but get their day-number references patched.
+  useEffect(() => {
+    const storedVersion = localStorage.getItem('family_trip_schema_version');
+    if (storedVersion === TRIP_SCHEMA_VERSION) return;
+
+    setItinerary(INITIAL_ITINERARY);
+    setCompletedStops([]);
+    setNotes(prev => prev.map(n => ({ ...n, text: patchDayRefs(n.text) })));
+    setTodoList(prev => prev.map(p => ({ ...p, text: patchDayRefs(p.text) })));
+    setActiveDayNumber(1);
+    localStorage.setItem('family_trip_schema_version', TRIP_SCHEMA_VERSION);
   }, []);
 
   // Current active day data
@@ -276,7 +307,7 @@ export default function App() {
                 </div>
                 <div>
                   <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                    <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#4A5D4E]">Neil & Archana • Aug 1 – Aug 9</span>
+                    <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#4A5D4E]">Neil & Archana • Aug 2 – Aug 9</span>
                     <span className="w-1 h-1 rounded-full bg-art-charcoal/30" />
                     <span className="text-[10px] uppercase font-bold tracking-wider text-art-charcoal/60 font-mono">Fitzy (Dog), Reva & Kabir Approved</span>
                   </div>
@@ -390,7 +421,7 @@ export default function App() {
                 {/* Day horizontal step selector */}
                 <div className="space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-[#2C2A26]/50 font-mono">Select active driving day:</h3>
-                  <div className="grid grid-cols-9 gap-1.5 pb-2">
+                  <div className="grid grid-cols-8 gap-1.5 pb-2">
                     {itinerary.map(day => {
                       const isActive = day.dayNumber === activeDayNumber;
                       const dayStops = day.items.map(i => i.id);
