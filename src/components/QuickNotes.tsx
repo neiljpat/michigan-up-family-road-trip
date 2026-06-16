@@ -44,7 +44,7 @@ export default function QuickNotes({ notes, onAddNote, onDeleteNote }: QuickNote
   };
 
   return (
-    <div className="bg-white border border-art-charcoal/10 rounded-3xl p-6 shadow-sm flex flex-col h-[525px] text-art-charcoal">
+    <div className="bg-white border border-art-charcoal/10 rounded-3xl p-6 shadow-sm flex flex-col h-[760px] text-art-charcoal">
       {/* Header */}
       <div className="flex items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-3">
